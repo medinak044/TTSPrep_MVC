@@ -64,7 +64,7 @@ public class AccountController : Controller
             return View(new LoginVM());
         }
 
-        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).ControllerName());
+        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).GetControllerName());
     }
     #endregion
 
@@ -98,7 +98,8 @@ public class AccountController : Controller
             return View(loginVM);
         }
 
-        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).ControllerName());
+        TempData["success"] = "Login successful";
+        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).GetControllerName());
     }
 
     [HttpGet]
@@ -150,66 +151,66 @@ public class AccountController : Controller
             return RedirectToAction("Login");
         }
        
-        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).ControllerName());
+        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).GetControllerName());
     }
 
     [HttpGet]
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
-        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).ControllerName());
+        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).GetControllerName());
     }
 
-    [HttpGet("Default")]
-    public async Task<ActionResult> Default()
-    {
-        #region Account Roles (Identity framework)
-        var accountRoleNames = new List<string>();
+    //[HttpGet("Default")]
+    //public async Task<ActionResult> Default()
+    //{
+    //    #region Account Roles (Identity framework)
+    //    var accountRoleNames = new List<string>();
 
-        if (await _roleManager.FindByNameAsync("AppUser") == null)
-        {
-            accountRoleNames.Add("AppUser");
-        }
-        if (await _roleManager.FindByNameAsync("Admin") == null)
-        {
-            accountRoleNames.Add("Admin");
-        }
+    //    if (await _roleManager.FindByNameAsync("AppUser") == null)
+    //    {
+    //        accountRoleNames.Add("AppUser");
+    //    }
+    //    if (await _roleManager.FindByNameAsync("Admin") == null)
+    //    {
+    //        accountRoleNames.Add("Admin");
+    //    }
 
-        foreach (var accountRoleName in accountRoleNames)
-        {
-            await _roleManager.CreateAsync(new IdentityRole(accountRoleName));
-        }
-        #endregion
+    //    foreach (var accountRoleName in accountRoleNames)
+    //    {
+    //        await _roleManager.CreateAsync(new IdentityRole(accountRoleName));
+    //    }
+    //    #endregion
 
-        #region AppUsers (Identity framework)
-        var demoIdentityPassword = "Password!23";
+    //    #region AppUsers (Identity framework)
+    //    var demoIdentityPassword = "Password!23";
 
-        if (await _userManager.FindByEmailAsync("admin@example.com") == null)
-        {
-            var adminUser = new AppUser()
-            {
-                Email = "admin@example.com", // Email serves as username in TTSPrep app
-            };
-            await _userManager.CreateAsync(adminUser, demoIdentityPassword);
-            // After user is created, add role
-            var foundUser = await _userManager.FindByEmailAsync(adminUser.Email);
-            await _userManager.AddToRoleAsync(foundUser, "AppUser");
-            await _userManager.AddToRoleAsync(foundUser, "Admin");
-        }
+    //    if (await _userManager.FindByEmailAsync("admin@example.com") == null)
+    //    {
+    //        var adminUser = new AppUser()
+    //        {
+    //            Email = "admin@example.com", // Email serves as username in TTSPrep app
+    //        };
+    //        await _userManager.CreateAsync(adminUser, demoIdentityPassword);
+    //        // After user is created, add role
+    //        var foundUser = await _userManager.FindByEmailAsync(adminUser.Email);
+    //        await _userManager.AddToRoleAsync(foundUser, "AppUser");
+    //        await _userManager.AddToRoleAsync(foundUser, "Admin");
+    //    }
 
-        if (await _userManager.FindByEmailAsync("appuser@example.com") == null)
-        {
-            var appUser = new AppUser()
-            {
-                Email = "appuser@example.com",
-            };
-            await _userManager.CreateAsync(appUser, demoIdentityPassword);
-            // After user is created, add role
-            var foundUser = await _userManager.FindByEmailAsync(appUser.Email);
-            await _userManager.AddToRoleAsync(foundUser, "AppUser");
-        }
-        #endregion
+    //    if (await _userManager.FindByEmailAsync("appuser@example.com") == null)
+    //    {
+    //        var appUser = new AppUser()
+    //        {
+    //            Email = "appuser@example.com",
+    //        };
+    //        await _userManager.CreateAsync(appUser, demoIdentityPassword);
+    //        // After user is created, add role
+    //        var foundUser = await _userManager.FindByEmailAsync(appUser.Email);
+    //        await _userManager.AddToRoleAsync(foundUser, "AppUser");
+    //    }
+    //    #endregion
 
-        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).ControllerName());
-    }
+    //    return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).GetControllerName());
+    //}
 }

@@ -12,7 +12,7 @@ using TTSPrep_MVC.Data;
 namespace TTSPrep_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231229223245_InitialCreate")]
+    [Migration("20231230203914_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -234,15 +234,15 @@ namespace TTSPrep_MVC.Migrations
 
             modelBuilder.Entity("TTSPrep_MVC.Models.Chapter", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ProjectId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -256,12 +256,12 @@ namespace TTSPrep_MVC.Migrations
 
             modelBuilder.Entity("TTSPrep_MVC.Models.Page", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ChapterId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ChapterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
@@ -278,9 +278,8 @@ namespace TTSPrep_MVC.Migrations
 
             modelBuilder.Entity("TTSPrep_MVC.Models.Project", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -306,9 +305,8 @@ namespace TTSPrep_MVC.Migrations
 
             modelBuilder.Entity("TTSPrep_MVC.Models.Word", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ModifiedSpelling")
                         .HasColumnType("nvarchar(max)");
@@ -317,8 +315,9 @@ namespace TTSPrep_MVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ProjectId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

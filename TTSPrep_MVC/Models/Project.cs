@@ -6,7 +6,7 @@ namespace TTSPrep_MVC.Models;
 public class Project
 {
     [Key]
-    public Guid Id { get; set; }
+    public string Id { get; set; }
     public string? Title { get; set; } // Default to "untitled-123" (based on id)
     public string? Description { get; set; }
     public DateTime? CreatedDate { get; set; } // = DateTime.Now;

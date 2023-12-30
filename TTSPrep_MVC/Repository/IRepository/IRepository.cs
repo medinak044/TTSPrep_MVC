@@ -4,7 +4,7 @@ namespace TTSPrep_MVC.Repository.IRepository;
 
 public interface IRepository<T> where T : class
 {
-    Task<T> GetByIdAsync(Guid id);
+    Task<T> GetByIdAsync(string id);
     Task<IEnumerable<T>> GetAllAsync();
     Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate);
     IEnumerable<T> GetSome(Expression<Func<T, bool>> predicate);
