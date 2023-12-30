@@ -139,7 +139,7 @@ public class AccountController : Controller
         }
 
         // Assign default role to new user (Make sure roles exist in database first)
-        await _userManager.AddToRoleAsync(newUser, "AppUser");
+        await _userManager.AddToRoleAsync(newUser, UserRoles.User);
 
         // Log user in as a convenience
         var user = await _userManager.FindByEmailAsync(signUpVM.Email); // Track new user from db
