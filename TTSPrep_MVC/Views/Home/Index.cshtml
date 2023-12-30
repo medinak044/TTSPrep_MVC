@@ -1,6 +1,21 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<AppUser> SignInManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
+@* <style>
+    body {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.15));
+        background-size: cover;
+    }
+
+    h1, btn {
+        color: white;
+        text-shadow: 2px 2px 20px #000000;
+    }
+</style> *@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>

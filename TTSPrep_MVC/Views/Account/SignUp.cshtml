@@ -1,0 +1,45 @@
+﻿@using TTSPrep_MVC.Models.ViewModels
+
+@model SignUpVM
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<div class="container col-lg-4 col-md-6 col-sm-6" style="margin-top: 5rem; margin-bottom: 0.5rem;">
+    <div class="justify-content-center">
+        <div class="card card-lg text-center">
+            <div class="card-body" style="padding: 2.25rem;">
+                <div>
+                    <h2 class="text-center" style="margin-bottom: 2.25rem;">Sign Up</h2>
+                    <form method="post" asp-action="SignUp">
+                        <div class="form-group mb-4">
+                            @*<label asp-for="Email">Email</label>*@
+                            <input class="form-control input-group" asp-for="Email" placeholder="Email">
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            @*<label asp-for="Password">Password</label>*@
+                            <input class="form-control input-group" asp-for="Password" placeholder="Password">
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            @*<label asp-for="ConfirmPassword">Confirm password</label>*@
+                            <input class="form-control input-group" asp-for="ConfirmPassword" placeholder="ConfirmPassword">
+                            <span asp-validation-for="ConfirmPassword"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block" type="submit" style="display: block; width: 100%;">
+                                Sign Up
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+<div>Already have an account? <a asp-area="" asp-controller="Account" asp-action="Login">Log In</a></div>
+</div>

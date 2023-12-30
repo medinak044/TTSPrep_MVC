@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using TTSPrep_MVC.Helpers
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<AppUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +30,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-2 ms-auto">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light btn btn-danger px-3" asp-area="" asp-controller="Account" asp-action="Logout">
+                                    Logout
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light btn btn-success fw-bold px-3" asp-area="" asp-controller="Account" asp-action="SignUp">
+                                    Sign Up
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
