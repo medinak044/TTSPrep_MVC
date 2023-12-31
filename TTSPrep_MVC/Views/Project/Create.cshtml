@@ -1,4 +1,10 @@
-﻿<div class="navbar-container">
+﻿@using TTSPrep_MVC.Models.ViewModels
+@model ProjectCreateVM
+@{
+    ViewData["Title"] = "Project Create";
+}
+
+<div class="navbar-container">
 </div>
 <div class="main-container">
     <section class="space-sm">
@@ -8,29 +14,29 @@
             </div>
             <!--end of row-->
             <div class="row flex-md-row card card-md">
-                <div class="card-body bg-secondary">
+                <div class="card-body">
                     <div class="text-center mb-5">
-                        <h1 class="h2 mb-2">Create your own race</h1>
-                        <span>Challenge the runners in your community</span>
+                        <h1 class="h2 mb-2">Create a project</h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-6 col-lg-5">
                             <form method="post" asp-action="Create" enctype="multipart/form-data">
-@*                                 <div class="form-row form-group">
+                                <input type="hidden" id="AppUserId" name="AppUserId" asp-for="OwnerId" />
+                                <div class="form-row form-group">
                                     <div class="col">
-                                        <input asp-for="Title" class="form-control form-control-lg" placeholder="Title" />
+                                        <input asp-for="Title" class="form-control form-control mb-3" placeholder="Title" />
                                         <span asp-validation-for="Title" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-row form-group">
                                     <div class="col">
-                                        <input asp-for="Description" class="form-control form-control-lg" placeholder="Description" />
+                                        <input asp-for="Description" class="form-control form-control mb-3" placeholder="Description" />
                                         <span asp-validation-for="Description" class="text-danger"></span>
                                     </div>
-                                </div> *@
+                                </div>
                                 <div class="form-row form-group">
                                     <div class="col">
-                                        <button class="btn btn-block btn-success btn-lg" type="submit">Create Account</button>
+                                        <button class="btn btn-block btn-success" type="submit">Create</button>
                                     </div>
                                 </div>
                             </form>

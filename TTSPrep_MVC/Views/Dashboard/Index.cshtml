@@ -1,0 +1,56 @@
+﻿@using TTSPrep_MVC.Models.ViewModels
+@model DashboardVM
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Projects</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <br>
+
+    <!-- Button trigger modal (Create new project) -->
+    <button class="btn btn-primary">
+        <a class="nav-link text-light" asp-area="" asp-controller="Project" asp-action="Create">
+            <i class="bi bi-plus-lg me-2"></i><b>Create new project</b>
+        </a>
+    </button>
+
+
+    <table class="table table-striped container">
+        <thead>
+        <th>Title</th>
+        <th>Created</th>
+        <th></th> @*Project option buttons*@
+        </thead>
+
+        <tbody>
+            @foreach (var project in Model.Projects)
+            {
+            <tr>
+                    <td>@project.Title</td>
+                    <td>@project.CreatedDate</td> @*(Date yyyy/MM/dd, hh/mm/ss Military time)*@
+                <td>
+                        <a class="nav-link text-light" asp-controller="Project" asp-action="Delete"
+                           asp-route-projectId="@project.Id">
+                            <button class="btn btn-sm btn-danger me-2">                            
+                                        <i class="bi bi-x-lg me-2"></i>Remove                          
+                            </button>
+                        </a>
+                        <a asp-controller="Project" asp-action="Edit" asp-route-projectId="@project.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+
+                    @* <button class="btn btn-sm btn-warning me-2" routerLink="/edit-user/{{user.id}}">
+                        <i class="bi bi-pencil-square me-2"></i>Edit
+                    </button> *@
+                    <button class="btn btn-sm btn-info me-2" routerLink="/profile/{{user.id}}">
+                        <i class="bi bi-arrow-right me-2"></i>Open
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

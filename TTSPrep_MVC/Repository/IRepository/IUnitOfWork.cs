@@ -6,5 +6,7 @@ public interface IUnitOfWork
     IPageRepository Pages { get; }
     IProjectRepository Projects { get; }
     IWordRepository Words { get; }
+    string GetCurrentUserId();
+    void Dispose();
     Task<bool> SaveAsync();
 }

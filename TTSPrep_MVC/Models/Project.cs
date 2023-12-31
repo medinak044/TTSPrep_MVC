@@ -7,7 +7,7 @@ public class Project
 {
     [Key]
     public string Id { get; set; }
-    public string? Title { get; set; } // Default to "untitled-123" (based on id)
+    public string? Title { get; set; } // Default to "project_123" (based on id)
     public string? Description { get; set; }
     public DateTime? CreatedDate { get; set; } // = DateTime.Now;
     public DateTime LastModifiedDate { get; set; }
