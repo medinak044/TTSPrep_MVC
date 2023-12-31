@@ -3,7 +3,7 @@
 public interface IUnitOfWork
 {
     IChapterRepository Chapters { get; }
-    IPageRepository Pages { get; }
+    //IPageRepository Pages { get; }
     IProjectRepository Projects { get; }
     IWordRepository Words { get; }
     string GetCurrentUserId();

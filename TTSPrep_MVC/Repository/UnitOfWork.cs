@@ -23,7 +23,7 @@ public class UnitOfWork: IUnitOfWork
     }
 
     public IChapterRepository Chapters => new ChapterRepository(_context);
-    public IPageRepository Pages => new PageRepository(_context);
+    //public IPageRepository Pages => new PageRepository(_context);
     public IProjectRepository Projects => new ProjectRepository(_context);
     public IWordRepository Words => new WordRepository(_context);
 

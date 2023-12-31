@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TTSPrep_MVC.Data;
 
@@ -11,9 +12,11 @@ using TTSPrep_MVC.Data;
 namespace TTSPrep_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231231151150_RemovedPage")]
+    partial class RemovedPage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,9 +268,6 @@ namespace TTSPrep_MVC.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CurrentChapterId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -281,8 +281,6 @@ namespace TTSPrep_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CurrentChapterId");
 
                     b.HasIndex("OwnerId");
 
@@ -303,11 +301,9 @@ namespace TTSPrep_MVC.Migrations
 
                     b.Property<string>("ProjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("Words");
                 });
@@ -384,33 +380,16 @@ namespace TTSPrep_MVC.Migrations
 
             modelBuilder.Entity("TTSPrep_MVC.Models.Project", b =>
                 {
-                    b.HasOne("TTSPrep_MVC.Models.Chapter", "Chapter")
-                        .WithMany()
-                        .HasForeignKey("CurrentChapterId");
-
                     b.HasOne("TTSPrep_MVC.Models.AppUser", "Owner")
                         .WithMany("Projects")
                         .HasForeignKey("OwnerId");
 
-                    b.Navigation("Chapter");
-
                     b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("TTSPrep_MVC.Models.Word", b =>
-                {
-                    b.HasOne("TTSPrep_MVC.Models.Project", null)
-                        .WithMany("Words")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TTSPrep_MVC.Models.Project", b =>
                 {
                     b.Navigation("Chapters");
-
-                    b.Navigation("Words");
                 });
 
             modelBuilder.Entity("TTSPrep_MVC.Models.AppUser", b =>

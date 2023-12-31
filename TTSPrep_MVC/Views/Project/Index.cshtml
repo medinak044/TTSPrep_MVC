@@ -1,8 +1,49 @@
-﻿@using TTSPrep_MVC.Models.ViewModels
+﻿@using TTSPrep_MVC.Models
 
-@model ProjectCreateVM
+@model Project
 @{
-    // ViewData["Title"] = "Project";
+
 }
 
 @* Display big text box containing text from the current page, a list of pages, *@
+@* A (+) button for adding new chapters to project*@
+
+<div class="text-center">
+<h1>@Model.Title</h1>
+<h2>Chapters (@Model.Chapters.Count())</h2>
+<a class="btn btn-m btn-primary me-2" asp-controller="Chapter" asp-action="Create">
+    <i class="bi bi-plus-lg me-2"></i>Add Chapter
+</a>
+<hr>
+@foreach (var chapter in Model.Chapters)
+{
+    @*Chapter (See bootstrap for a card similar to 11Labs)*@
+}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Chapter Title</h5>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-danger"><i class="bi bi-x-lg me-2"></i>Remove</button>
+                <button type="button" class="btn btn-primary"><i class="bi bi-arrow-right me-2"></i>Open</button>
+            </div>
+        </div>
+    </div>
+
+<div/>
+
+@* NEW PLAN:
+    - Make this page a list of all chapters, with each list element leading to a chapter web page
+*@
+
+@if (Model.Chapters.Count() == 0)
+{
+    <h2>(New Unsaved Chapter)</h2>
+}
+@*This form will be for the Chapter. A new project won't have a chapter unless a new chapter is saved*@
+<form>
+    @*hidden Id (field will be empty if new project without chapters)*@
+    <div class="input-group">
+        <textarea class="form-control" aria-label="With textarea"></textarea>
+    </div>
+
+</form>

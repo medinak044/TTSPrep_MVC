@@ -20,7 +20,7 @@ public class ProjectController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string projectId, string currentChapterId)
     {
         // Display the single project page view, complete with text features
         var currentUserId = _unitOfWork.GetCurrentUserId();
@@ -31,8 +31,39 @@ public class ProjectController : Controller
         }
 
         // Get the project data
+        var project = await _unitOfWork.Projects.GetByIdAsync(projectId);
 
+        // Wait for the project object data to load before making more db calls
+        if (project != null)
+        {
+            // Get the chapter data (rework this to use Include() for eager loading so that all data is gathered in one call)
+            project.Chapters = _unitOfWork.Chapters.GetSome(c => c.ProjectId == project.Id).ToList();
+            // Word data associated with project
+            project.Words = _unitOfWork.Words.GetSome(w => w.ProjectId == project.Id).ToList();
 
+        }
+
+        return View(project);
+
+       
+        /* Probably need a view model to
+         * {
+         *  project = ,
+         *  
+         * }
+        */
+    }
+
+    [HttpPost,ActionName("Index")]
+    public async Task<IActionResult> IndexPOST()
+    {
+        // If original text is null, save text as original and modified text
+
+        // If original text is not null, save text as modified text
+
+        // If text box is empty, make both original and modified text null
+
+        TempData["success"] = "Saved text";
         return View();
     }
 
