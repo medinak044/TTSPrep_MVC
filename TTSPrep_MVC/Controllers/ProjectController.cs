@@ -58,7 +58,7 @@ public class ProjectController : Controller
     {
         if (!ModelState.IsValid)
         {
-            ModelState.AddModelError("", "Create project failed");
+            ModelState.AddModelError("", "Failed to create");
             TempData["error"] = "ModelState is invalid";
             return View();
         }
@@ -116,9 +116,33 @@ public class ProjectController : Controller
     [HttpPost, ActionName("Edit")]
     public async Task<IActionResult> EditPOST(ProjectEditVM projectEditVM)
     {
-        //map values to model
+        if (!ModelState.IsValid)
+        {
+            ModelState.AddModelError("", "Failed to edit");
+            TempData["error"] = "ModelState is invalid";
+            return View();
+        }
+
+        // Check if exists in db
+        var project = await _unitOfWork.Projects.GetByIdAsync(projectEditVM.Id);
+        if (project == null)
+        {
+            TempData["error"] = "Id does not exist in database";
+            return View();
+        }
+
+        // Overwrite values
+        project.Title = projectEditVM.Title;
+        project.Description = projectEditVM.Description;
+        project.LastModifiedDate = DateTime.Now;
 
         // Save changes
+        await _unitOfWork.Projects.UpdateAsync(project);
+        if (!await _unitOfWork.SaveAsync())
+        {
+            TempData["error"] = "Something went wrong while saving";
+            return View();
+        }
 
         TempData["success"] = "Project updated";
         return RedirectToAction(nameof(DashboardController.Index), nameof(DashboardController).GetControllerName());
@@ -144,6 +168,13 @@ public class ProjectController : Controller
         {
             TempData["error"] = "Unable to get current user Id";
             return View("Error");
+        }
+
+        await _unitOfWork.Projects.RemoveAsync(project);
+        if (!await _unitOfWork.SaveAsync())
+        {
+            TempData["error"] = "Something went wrong while saving";
+            return View();
         }
 
         TempData["success"] = "Project deleted";
