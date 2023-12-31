@@ -26,8 +26,12 @@
                     </a>
                 </h5>
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-danger"><i class="bi bi-x-lg me-2"></i>Remove</button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-arrow-right me-2"></i>Open</button>
+                    <a class="btn btn-s btn-danger me-2" asp-controller="Chapter" asp-action="Delete" asp-route-chapterId=@chapter.Id>
+                        <i class="bi bi-x-lg me-2"></i>Remove
+                    </a>
+                    <a class="btn btn-s btn-primary me-2" asp-controller="Chapter" asp-action="Edit" asp-route-chapterId=@chapter.Id>
+                        <i class="bi bi-arrow-right me-2"></i>Open
+                    </a>
                 </div>
             </div>
         </div>

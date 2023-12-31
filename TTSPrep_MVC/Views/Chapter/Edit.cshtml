@@ -1,0 +1,58 @@
+﻿@using TTSPrep_MVC.Models
+@model Chapter
+
+<div class="navbar-container">
+</div>
+<div class="main-container">
+    <section class="space-sm">
+        <div class="container">
+            <div class="row mb-5">
+                <!--end of col-->
+            </div>
+            <!--end of row-->
+            <div class="row flex-md-row card card-md">
+                <div class="card-body">
+                    <div class="text-center mb-5">
+                        <h1 class="h2 mb-2">Edit chapter</h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-6 col-lg-5">
+                            <form method="post" asp-action="Edit">
+                                <input type="hidden" id="Id" name="Id" asp-for="Id" />
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input asp-for="Title" class="form-control form-control mb-3" placeholder="Title" />
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input type="hidden" asp-for="OrderNumber" class="form-control form-control mb-3" placeholder="OrderNumber" />
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input asp-for="OriginalText" disabled class="form-control form-control mb-3" placeholder="OriginalText" />
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input asp-for="ModifiedText" class="form-control form-control mb-3" placeholder="ModifiedText" />
+                                    </div>
+                                </div>
+                                <input type="hidden" id="ProjectId" name="ProjectId" asp-for="ProjectId" />
+
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-success" type="submit">Save changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end of container-->
+    </section>
+    <!--end of section-->
+</div>

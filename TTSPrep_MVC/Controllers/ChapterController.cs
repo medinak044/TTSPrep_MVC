@@ -99,8 +99,8 @@ public class ChapterController : Controller
         return View(chapter);
     }
 
-    [HttpPost, ActionName("Edit")]
-    public async Task<IActionResult> EditPOST(Chapter chapterForm)
+    [HttpPost]
+    public async Task<IActionResult> Edit(Chapter chapterForm)
     {
         var chapter = await _unitOfWork.Chapters.GetByIdAsync(chapterForm.Id);
         if (chapter == null)
@@ -139,6 +139,41 @@ public class ChapterController : Controller
         }
 
         TempData["success"] = "Chapter updated";
-        return RedirectToAction(nameof(ProjectController.Index), nameof(ProjectController).GetControllerName());
+        return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(string chapterId)
+    {
+        var chapter = await _unitOfWork.Chapters.GetByIdAsync(chapterId);
+        if (chapter == null)
+        {
+            TempData["error"] = "Unable to get chapter data";
+            return View("Error");
+        }
+
+        return View(chapter);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(Chapter chapterForm)
+    {
+        var chapter = await _unitOfWork.Chapters.GetByIdAsync(chapterForm.Id);
+        if (chapter == null)
+        {
+            TempData["error"] = "Unable to get chapter data";
+            return View("Error");
+        }
+
+        await _unitOfWork.Chapters.RemoveAsync(chapter);
+        if (!await _unitOfWork.SaveAsync())
+        {
+            TempData["error"] = "Something went wrong while saving";
+            return View();
+        }
+
+        TempData["success"] = "Chapter deleted";
+        return RedirectToAction(nameof(ProjectController.Index), nameof(ProjectController).GetControllerName(),
+            new { projectId = chapterForm.ProjectId });
     }
 }

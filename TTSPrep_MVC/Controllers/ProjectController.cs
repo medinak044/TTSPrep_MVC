@@ -184,6 +184,7 @@ public class ProjectController : Controller
             TempData["error"] = "Unable to get current user Id";
             return View("Error");
         }
+
         return View(project);
     }
 
