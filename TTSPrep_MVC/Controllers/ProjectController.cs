@@ -20,7 +20,7 @@ public class ProjectController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(string projectId, string currentChapterId)
+    public async Task<IActionResult> Index(string projectId)
     {
         // Display the single project page view, complete with text features
         var currentUserId = _unitOfWork.GetCurrentUserId();
@@ -54,18 +54,14 @@ public class ProjectController : Controller
         */
     }
 
-    [HttpPost,ActionName("Index")]
-    public async Task<IActionResult> IndexPOST()
-    {
-        // If original text is null, save text as original and modified text
+    //[HttpPost,ActionName("Index")]
+    //public async Task<IActionResult> IndexPOST()
+    //{
+        
 
-        // If original text is not null, save text as modified text
-
-        // If text box is empty, make both original and modified text null
-
-        TempData["success"] = "Saved text";
-        return View();
-    }
+    //    TempData["success"] = "Saved text";
+    //    return View();
+    //}
 
     [HttpGet]
     public async Task<IActionResult> Create()

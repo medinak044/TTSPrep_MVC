@@ -11,24 +11,27 @@
 <div class="text-center">
 <h1>@Model.Title</h1>
 <h2>Chapters (@Model.Chapters.Count())</h2>
-<a class="btn btn-m btn-primary me-2" asp-controller="Chapter" asp-action="Create">
+    <a class="btn btn-m btn-primary me-2" asp-controller="Chapter" asp-action="Create" asp-route-projectId=@Model.Id>
     <i class="bi bi-plus-lg me-2"></i>Add Chapter
 </a>
 <hr>
 @foreach (var chapter in Model.Chapters)
 {
-    @*Chapter (See bootstrap for a card similar to 11Labs)*@
-}
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Chapter Title</h5>
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-danger"><i class="bi bi-x-lg me-2"></i>Remove</button>
-                <button type="button" class="btn btn-primary"><i class="bi bi-arrow-right me-2"></i>Open</button>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a style="text-decoration: none; color: black;" asp-controller="Chapter" asp-action="Edit"
+                       asp-route-chapterId="@chapter.Id">
+                        @chapter.Title
+                    </a>
+                </h5>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-danger"><i class="bi bi-x-lg me-2"></i>Remove</button>
+                    <button type="button" class="btn btn-primary"><i class="bi bi-arrow-right me-2"></i>Open</button>
+                </div>
             </div>
         </div>
-    </div>
-
+}
 <div/>
 
 @* NEW PLAN:
