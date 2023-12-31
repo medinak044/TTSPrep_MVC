@@ -113,21 +113,39 @@ public class ProjectController : Controller
         return View(projectEditVM);
     }
 
+    [HttpPost, ActionName("Edit")]
+    public async Task<IActionResult> EditPOST(ProjectEditVM projectEditVM)
+    {
+        //map values to model
+
+        // Save changes
+
+        TempData["success"] = "Project updated";
+        return RedirectToAction(nameof(DashboardController.Index), nameof(DashboardController).GetControllerName());
+    }
 
     [HttpGet]
     public async Task<IActionResult> Delete(string projectId)
     {
-        // Display the project details
         var project = await _unitOfWork.Projects.GetByIdAsync(projectId);
-        //var project = _unitOfWork.Projects.GetSome(p => p.Id == projectId).ToList();
-        if (project == null) { TempData["error"] = "Unable to get current user Id"; }
+        if (project == null)
+        {
+            TempData["error"] = "Unable to get current user Id";
+            return View("Error");
+        }
         return View(project);
     }
 
     [HttpPost, ActionName("Delete")]
-    public async Task<IActionResult> DeleteProject(string projectId)
+    public async Task<IActionResult> DeletePOST(Project projectTemp) // Must submit an object to params of POST method
     {
-        // Delete project
+        var project = await _unitOfWork.Projects.GetByIdAsync(projectTemp.Id);
+        if (project == null)
+        {
+            TempData["error"] = "Unable to get current user Id";
+            return View("Error");
+        }
+
         TempData["success"] = "Project deleted";
         return RedirectToAction(nameof(DashboardController.Index), nameof(DashboardController).GetControllerName());
     }
