@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TTSPrep_MVC.Helpers;
 using TTSPrep_MVC.Models;
 using TTSPrep_MVC.Repository.IRepository;
@@ -86,8 +88,6 @@ public class ChapterController : Controller
         return RedirectToAction(nameof(ProjectController.Index), nameof(ProjectController).GetControllerName(), 
             new { projectId = chapterForm.ProjectId });
     }
-
-
     
     [HttpGet]
     public async Task<IActionResult> Edit(string chapterId)
@@ -147,8 +147,75 @@ public class ChapterController : Controller
         }
 
         TempData["success"] = "Chapter updated";
-        return View();
+        return RedirectToAction(nameof(ChapterController.Edit), nameof(ChapterController).GetControllerName(),
+            new { chapterId = chapterForm.Id });
     }
+
+
+    [HttpPost]
+    public async Task<IActionResult> EditModify(Chapter chapterForm)
+    {
+        #region Word replace logic
+        List<Word> wordIdentifierList = _unitOfWork.Words.GetSome(w => w.ProjectId == chapterForm.ProjectId).ToList();
+        if (wordIdentifierList.IsNullOrEmpty())
+        {
+            TempData["error"] = "No words for replacement were saved for this project";
+        }
+
+        // Break up the initial modified text into separate words/characters and store them into a collection
+        var modifiedTextWords = chapterForm.ModifiedText.Split(" ");
+
+        //Replace the words in the collection with partial match, and replace
+        for (int i = 0; i < modifiedTextWords.Length; i++)
+        {
+            for (int j = 0; j < wordIdentifierList.Count(); j++)
+            {
+                // Find out if the word matches a saved word
+                if (modifiedTextWords[i] == wordIdentifierList[j].OriginalSpelling)
+                {
+                    modifiedTextWords[i] = wordIdentifierList[j].ModifiedSpelling; // Replace with the modified spelling
+                    break;
+                }
+            }      
+        }
+
+        // Reconstruct the modified text
+        StringBuilder sb = new StringBuilder();
+        foreach (var w in modifiedTextWords)
+        {
+            sb.Append(w); // Append word (a word element might include a punctuation mark(s) "word...")
+
+            if (w != modifiedTextWords.Last())
+                sb.Append(" "); // Append space if word is not the last in the collection
+        }
+        string newModifiedText = sb.ToString();
+        #endregion
+
+        // Save modified text so it may show up when user is redirected back to the edit page
+        var chapter = await _unitOfWork.Chapters.GetByIdAsync(chapterForm.Id);
+        if (chapter == null)
+        {
+            TempData["error"] = "Unable to get chapter data";
+            return View("Error");
+        }
+        else
+        {
+            chapter.ModifiedText = newModifiedText; // Replace text
+        }
+
+        await _unitOfWork.Chapters.UpdateAsync(chapter);
+        if (!await _unitOfWork.SaveAsync())
+        {
+            TempData["error"] = "Something went wrong while saving";
+            return View();
+        }
+
+        TempData["success"] = "Text modified and saved";
+        return RedirectToAction(nameof(ChapterController.Edit), nameof(ChapterController).GetControllerName(),
+            new { chapterId = chapterForm.Id });
+    }
+
+
 
     [HttpGet]
     public async Task<IActionResult> Delete(string chapterId)
