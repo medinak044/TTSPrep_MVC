@@ -6,12 +6,11 @@
 
 
 <div class="text-center">
-    <h1 class="display-4">Projects</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>Projects (@Model.Projects.Count())</h1>
 
     <br>
 
-    <!-- Button trigger modal (Create new project) -->
+    <!-- (Create new project) -->
     <button class="btn btn-primary">
         <a class="nav-link text-light" asp-area="" asp-controller="Project" asp-action="Create">
             <i class="bi bi-plus-lg me-2"></i><b>Create new project</b>
@@ -42,13 +41,10 @@
                     <a class="btn btn-sm btn-warning me-2" asp-controller="Project" asp-action="Edit" asp-route-projectId="@project.Id">
                         <i class="bi bi-pencil-square me-2"></i>Edit
                     </a>
-
-                        <a class="btn btn-sm btn-info me-2" asp-controller="Project" asp-action="Index" asp-route-projectId="@project.Id">
-                            <i class="bi bi-arrow-right me-2"></i>Open
-                        </a>
-                    @* <button class="btn btn-sm btn-info me-2" routerLink="/profile/{{user.id}}">
+                    <a class="btn btn-sm btn-info me-2" asp-controller="Project" asp-action="Index" asp-route-projectId="@project.Id">
                         <i class="bi bi-arrow-right me-2"></i>Open
-                    </button> *@
+                    </a>
+
                 </td>
             </tr>
             }
