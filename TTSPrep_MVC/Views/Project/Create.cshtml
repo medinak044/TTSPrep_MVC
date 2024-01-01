@@ -21,7 +21,7 @@
                     <div class="row justify-content-center">
                         <div class="col-6 col-lg-5">
                             <form method="post" asp-action="Create" enctype="multipart/form-data">
-                                <input type="hidden" id="AppUserId" name="AppUserId" asp-for="OwnerId" />
+                                <input type="hidden" asp-for="OwnerId" />
                                 <div class="form-row form-group">
                                     <div class="col">
                                         <input asp-for="Title" class="form-control form-control mb-3" placeholder="Title" />

@@ -32,19 +32,17 @@
                     <td>@project.Title</td>
                     <td>@project.CreatedDate</td> @*(Date yyyy/MM/dd, hh/mm/ss Military time)*@
                 <td>
-                    <a class="nav-link text-light" asp-controller="Project" asp-action="Delete"
-                        asp-route-projectId="@project.Id">
-                        <button class="btn btn-sm btn-danger me-2">                            
-                                    <i class="bi bi-x-lg me-2"></i>Remove                          
-                        </button>
-                    </a>
-                    <a class="btn btn-sm btn-warning me-2" asp-controller="Project" asp-action="Edit" asp-route-projectId="@project.Id">
-                        <i class="bi bi-pencil-square me-2"></i>Edit
-                    </a>
-                    <a class="btn btn-sm btn-info me-2" asp-controller="Project" asp-action="Index" asp-route-projectId="@project.Id">
-                        <i class="bi bi-arrow-right me-2"></i>Open
-                    </a>
-
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <a class="btn btn-s btn-danger me-2" asp-controller="Project" asp-action="Delete" asp-route-projectId=@project.Id>
+                                <i class="bi bi-x-lg me-2"></i>Remove
+                            </a>
+                            <a class="btn btn-s btn-warning me-2" asp-controller="Project" asp-action="Edit" asp-route-projectId=@project.Id>
+                                <i class="bi bi-pencil-square me-2"></i>Edit
+                            </a>
+                            <a class="btn btn-s btn-primary me-2" asp-controller="Project" asp-action="Index" asp-route-projectId=@project.Id>
+                                <i class="bi bi-arrow-right me-2"></i>Open
+                            </a>
+                        </div>
                 </td>
             </tr>
             }

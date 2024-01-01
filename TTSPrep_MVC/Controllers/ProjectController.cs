@@ -43,24 +43,7 @@ public class ProjectController : Controller
         }
 
         return View(project);
-
-       
-        /* Probably need a view model to
-         * {
-         *  project = ,
-         *  
-         * }
-        */
     }
-
-    //[HttpPost,ActionName("Index")]
-    //public async Task<IActionResult> IndexPOST()
-    //{
-        
-
-    //    TempData["success"] = "Saved text";
-    //    return View();
-    //}
 
     [HttpGet]
     public async Task<IActionResult> Create()
@@ -139,8 +122,8 @@ public class ProjectController : Controller
         return View(projectEditVM);
     }
 
-    [HttpPost, ActionName("Edit")]
-    public async Task<IActionResult> EditPOST(ProjectEditVM projectEditVM)
+    [HttpPost]
+    public async Task<IActionResult> Edit(ProjectEditVM projectEditVM)
     {
         if (!ModelState.IsValid)
         {
@@ -188,7 +171,7 @@ public class ProjectController : Controller
     }
 
     [HttpPost, ActionName("Delete")]
-    public async Task<IActionResult> DeletePOST(Project projectTemp) // Must submit an object to params of POST method
+    public async Task<IActionResult> DeletePOST(Project projectTemp)
     {
         var project = await _unitOfWork.Projects.GetByIdAsync(projectTemp.Id);
         if (project == null)

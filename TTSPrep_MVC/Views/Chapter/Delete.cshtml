@@ -1,8 +1,6 @@
 ﻿@using TTSPrep_MVC.Models
 @model Chapter
 
-<h1>Are you sure you want to delete this chapter?</h1>
-
 <div class="navbar-container">
 </div>
 <div class="main-container">
@@ -15,12 +13,12 @@
             <div class="row flex-md-row card card-md">
                 <div class="card-body">
                     <div class="text-center mb-5">
-                        <h1 class="h2 mb-2">Delete chapter?</h1>
+                        <h1 class="h2 mb-2">Are you sure you want to delete this chapter?</h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-6 col-lg-5">
                             <form method="post" asp-action="Delete">
-                                <input type="hidden" id="Id" name="Id" asp-for="Id" />
+                                <input type="hidden" asp-for="Id" />
                                 <div class="form-row form-group">
                                     <div class="col">
                                         <label asp-for="Title">Title</label>
