@@ -11,9 +11,12 @@
     <a class="btn btn-m btn-primary me-2" asp-controller="Chapter" asp-action="Create" asp-route-projectId=@Model.Id>
         <i class="bi bi-plus-lg me-2"></i>Add Chapter
     </a>
-    <a class="btn btn-m btn-warning me-2" asp-controller="Word" asp-action="Create" asp-route-projectId=@Model.Id>
-        <i class="bi bi-plus-lg me-2"></i>Add Word
+    <a class="btn btn-m btn-success me-2" asp-controller="Word" asp-action="Index" asp-route-projectId=@Model.Id>
+        <i class="bi bi-arrow-right me-2"></i>View words
     </a>
+    @* <a class="btn btn-m btn-warning me-2" asp-controller="Word" asp-action="Create" asp-route-projectId=@Model.Id>
+        <i class="bi bi-plus-lg me-2"></i>Add Word
+    </a> *@
 <hr>
 @foreach (var chapter in Model.Chapters)
 {

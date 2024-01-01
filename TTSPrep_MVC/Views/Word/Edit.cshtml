@@ -1,0 +1,50 @@
+﻿@using TTSPrep_MVC.Models
+@model Word
+
+<div class="navbar-container">
+</div>
+<div class="main-container">
+    <section class="space-sm">
+        <div class="container">
+            <div class="row mb-5">
+                <!--end of col-->
+            </div>
+            <!--end of row-->
+            <div class="row flex-md-row card card-md">
+                <div class="card-body">
+                    <div class="text-center mb-5">
+                        <h1 class="h2 mb-2">Edit word</h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-6 col-lg-5">
+                            <form method="post" asp-action="Edit" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="Id" />
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input asp-for="OriginalSpelling" class="form-control form-control mb-3" placeholder="Original spelling" />
+                                        <span asp-validation-for="OriginalSpelling" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input asp-for="ModifiedSpelling" class="form-control form-control mb-3" placeholder="Modified spelling" />
+                                        <span asp-validation-for="ModifiedSpelling" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="ProjectId" name="ProjectId" asp-for="ProjectId" />
+
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-success" type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end of container-->
+    </section>
+    <!--end of section-->
+</div>

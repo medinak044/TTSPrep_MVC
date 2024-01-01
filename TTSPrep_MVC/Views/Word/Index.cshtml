@@ -1,0 +1,41 @@
+﻿@using TTSPrep_MVC.Models
+@model Project
+
+@*Display a list of words used for the word replace feature*@
+@*Include a search filter feature*@
+<div class="text-center">
+    <h1>Words (@Model.Words.Count())</h1>
+    <a class="btn btn-m btn-primary me-2" asp-controller="Word" asp-action="Create" asp-route-projectId=@Model.Id>
+        <i class="bi bi-plus-lg me-2"></i>Add Word
+    </a>  
+    <hr>
+
+
+    <table class="table table-striped container">
+        <thead>
+        <th>Original Spelling</th>
+        <th>Modified Spelling</th>
+        <th></th> @*Project option buttons*@
+        </thead>
+
+        <tbody>
+            @foreach (var word in Model.Words)
+            {
+                <tr>
+                    <td>@word.OriginalSpelling</td>
+                    <td>@word.ModifiedSpelling</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <a class="btn btn-s btn-danger me-2" asp-controller="Word" asp-action="Delete" asp-route-wordId=@word.Id>
+                                <i class="bi bi-x-lg me-2"></i>Remove
+                            </a>
+                            <a class="btn btn-s btn-warning me-2" asp-controller="Word" asp-action="Edit" asp-route-wordId=@word.Id>
+                                <i class="bi bi-pencil-square me-2"></i>Edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

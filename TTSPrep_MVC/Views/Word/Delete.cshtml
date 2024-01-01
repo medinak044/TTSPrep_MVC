@@ -1,7 +1,7 @@
 ﻿@using TTSPrep_MVC.Models
-@model Chapter
+@model Word
 
-<h1>Are you sure you want to delete this chapter?</h1>
+<h1>Are you sure you want to delete this word?</h1>
 
 <div class="navbar-container">
 </div>
@@ -15,31 +15,22 @@
             <div class="row flex-md-row card card-md">
                 <div class="card-body">
                     <div class="text-center mb-5">
-                        <h1 class="h2 mb-2">Delete chapter?</h1>
+                        <h1 class="h2 mb-2">Delete word</h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-6 col-lg-5">
-                            <form method="post" asp-action="Delete">
-                                <input type="hidden" id="Id" name="Id" asp-for="Id" />
+                            <form method="post" asp-action="Delete" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="Id" />
                                 <div class="form-row form-group">
                                     <div class="col">
-                                        <label asp-for="Title">Title</label>
-                                        <input asp-for="Title" disabled class="form-control form-control mb-3" placeholder="Title" />
+                                        <input asp-for="OriginalSpelling" disabled class="form-control form-control mb-3" placeholder="Original spelling" />
+                                        <span asp-validation-for="OriginalSpelling" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-row form-group">
                                     <div class="col">
-                                        <input type="hidden" asp-for="OrderNumber" disabled class="form-control form-control mb-3" placeholder="OrderNumber" />
-                                    </div>
-                                </div>
-                                <div class="form-row form-group">
-                                    <div class="input-group mb-3">
-                                        <textarea asp-for="OriginalText" disabled class="form-control" placeholder="OriginalText" aria-label="With textarea"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-row form-group">
-                                    <div class="input-group mb-3">
-                                        <textarea asp-for="ModifiedText" class="form-control" style="height: 40rem" placeholder="ModifiedText" aria-label="With textarea"></textarea>
+                                        <input asp-for="ModifiedSpelling" disabled class="form-control form-control mb-3" placeholder="Modified spelling" />
+                                        <span asp-validation-for="ModifiedSpelling" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <input type="hidden" id="ProjectId" name="ProjectId" asp-for="ProjectId" />

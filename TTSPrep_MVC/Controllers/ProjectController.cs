@@ -40,7 +40,6 @@ public class ProjectController : Controller
             project.Chapters = _unitOfWork.Chapters.GetSome(c => c.ProjectId == project.Id).ToList();
             // Word data associated with project
             project.Words = _unitOfWork.Words.GetSome(w => w.ProjectId == project.Id).ToList();
-
         }
 
         return View(project);
