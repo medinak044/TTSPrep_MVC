@@ -1,6 +1,10 @@
 ﻿@using TTSPrep_MVC.Models
 @model Chapter
 
+<a class="btn btn-s btn-secondary me-2" asp-controller="Chapter" asp-action="ReturnToChapters" asp-route-projectId=@Model.ProjectId>
+    <i class="bi bi-arrow-return-left me-2"></i>Back to chapters
+</a>
+
 <div class="navbar-container">
 </div>
 <div class="main-container">

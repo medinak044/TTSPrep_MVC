@@ -1,6 +1,10 @@
 ﻿@using TTSPrep_MVC.Models
 @model Word
 
+<a class="btn btn-s btn-secondary me-2" asp-controller="Word" asp-action="ReturnToWords" asp-route-projectId=@Model.ProjectId>
+    <i class="bi bi-arrow-return-left me-2"></i>Back to word list
+</a>
+
 <div class="navbar-container">
 </div>
 <div class="main-container">

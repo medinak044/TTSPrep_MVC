@@ -46,6 +46,13 @@ public class ProjectController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> ReturnToDashboard()
+    {
+        // Return user to user dashboard
+        return RedirectToAction(nameof(DashboardController.Index), nameof(DashboardController).GetControllerName());
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Create()
     {
         var currentUserId = _unitOfWork.GetCurrentUserId();

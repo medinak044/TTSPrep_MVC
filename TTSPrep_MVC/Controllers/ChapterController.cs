@@ -24,6 +24,14 @@ public class ChapterController : Controller
         return View();
     }
 
+    [HttpGet]
+    public async Task<IActionResult> ReturnToChapters(string projectId)
+    {
+        // Return user to chapters dashboard
+        return RedirectToAction(nameof(ProjectController.Index), nameof(ProjectController).GetControllerName(),
+            new { projectId = projectId });
+    }
+
 
     [HttpGet]
     public async Task<IActionResult> Create(string projectId)

@@ -35,6 +35,22 @@ public class WordController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> ReturnToChapters(string projectId)
+    {
+        // Return user to chapters dashboard
+        return RedirectToAction(nameof(ProjectController.Index), nameof(ProjectController).GetControllerName(),
+            new { projectId = projectId });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ReturnToWords(string projectId)
+    {
+        // Return user to words list dashboard
+        return RedirectToAction(nameof(WordController.Index), nameof(WordController).GetControllerName(),
+            new { projectId = projectId });
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Create(string projectId)
     {     
         var word = new Word()
