@@ -21,22 +21,23 @@
                                 <input type="hidden" id="Id" name="Id" asp-for="Id" />
                                 <div class="form-row form-group">
                                     <div class="col">
+                                        <label asp-for="Title">Title</label>
                                         <input asp-for="Title" class="form-control form-control mb-3" placeholder="Title" />
                                     </div>
                                 </div>
                                 <div class="form-row form-group">
                                     <div class="col">
-                                        <input asp-for="OrderNumber" class="form-control form-control mb-3" placeholder="OrderNumber" />
+                                        <input asp-for="OrderNumber" hidden disabled class="form-control form-control mb-3" placeholder="OrderNumber" />
                                     </div>
                                 </div>
                                 <div class="form-row form-group">
-                                    <div class="col">
-                                        <input asp-for="OriginalText" class="form-control form-control mb-3" placeholder="OriginalText" />
+                                    <div class="input-group mb-3">
+                                        <textarea asp-for="OriginalText" disabled class="form-control" placeholder="OriginalText" aria-label="With textarea"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row form-group">
-                                    <div class="col">
-                                        <input asp-for="ModifiedText" class="form-control form-control mb-3" placeholder="ModifiedText" />
+                                    <div class="input-group mb-3">
+                                        <textarea asp-for="ModifiedText" disabled class="form-control" style="height: 0rem" placeholder="ModifiedText" aria-label="With textarea"></textarea>
                                     </div>
                                 </div>
                                 <input type="hidden" id="ProjectId" name="ProjectId" asp-for="ProjectId" />
