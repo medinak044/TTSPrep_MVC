@@ -13,7 +13,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<AppDbContext>(options => 
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer_Connection"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer_Connection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProdConnection"));
 });
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
