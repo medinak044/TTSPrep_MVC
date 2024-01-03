@@ -72,6 +72,8 @@ public class ChapterController : Controller
             Id = Guid.NewGuid().ToString(),
             Title = chapterForm.Title ?? $"Chapter {chapterForm.OrderNumber}",
             OrderNumber = chapterForm.OrderNumber,
+            OriginalText = chapterForm.OriginalText,
+            ModifiedText = chapterForm.OriginalText, // Copy the original text
             ProjectId = chapterForm.ProjectId
         };
 
@@ -157,9 +159,11 @@ public class ChapterController : Controller
     {
         #region Word replace logic
         List<Word> wordIdentifierList = _unitOfWork.Words.GetSome(w => w.ProjectId == chapterForm.ProjectId).ToList();
-        if (wordIdentifierList == null)
+        if (wordIdentifierList.Count == 0)
         {
             TempData["error"] = "No words for replacement were saved for this project";
+            return RedirectToAction(nameof(ChapterController.Edit), nameof(ChapterController).GetControllerName(),
+            new { chapterId = chapterForm.Id });
         }
 
         // Break up the initial modified text into separate words/characters and store them into a collection
@@ -176,7 +180,7 @@ public class ChapterController : Controller
                     modifiedTextWords[i] = wordIdentifierList[j].ModifiedSpelling; // Replace with the modified spelling
                     break;
                 }
-            }      
+            }
         }
 
         // Reconstruct the modified text
@@ -200,6 +204,14 @@ public class ChapterController : Controller
         }
         else
         {
+            // Detect if any changes were actually made to text before continuing
+            if (chapter.ModifiedText.Equals(newModifiedText))
+            {
+                TempData["error"] = "No words to replace were detected";
+                return RedirectToAction(nameof(ChapterController.Edit), nameof(ChapterController).GetControllerName(),
+            new { chapterId = chapterForm.Id });
+            }
+
             chapter.ModifiedText = newModifiedText; // Replace text
         }
 
@@ -207,7 +219,8 @@ public class ChapterController : Controller
         if (!await _unitOfWork.SaveAsync())
         {
             TempData["error"] = "Something went wrong while saving";
-            return View();
+            return RedirectToAction(nameof(ChapterController.Edit), nameof(ChapterController).GetControllerName(),
+            new { chapterId = chapterForm.Id });
         }
 
         TempData["success"] = "Text modified and saved";

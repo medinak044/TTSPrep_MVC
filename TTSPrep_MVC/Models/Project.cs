@@ -18,5 +18,5 @@ public class Project
     public ICollection<Word>? Words { get; set; }
     [ForeignKey("Chapter")]
     public string? CurrentChapterId { get; set; }
-    public Chapter? Chapter { get; set; }
+    //public Chapter? Chapter { get; set; }
 }

@@ -2,7 +2,7 @@
 @model Chapter
 
 <a class="btn btn-s btn-secondary me-2" asp-controller="Chapter" asp-action="ReturnToChapters" asp-route-projectId=@Model.ProjectId>
-    <i class="bi bi-arrow-return-left me-2"></i>Back to chapters
+    <i class="bi bi-arrow-return-left me-2"></i>Back to project view
 </a>
 
 <div class="navbar-container">
@@ -31,17 +31,17 @@
                                 </div>
                                 <div class="form-row form-group">
                                     <div class="col">
-                                        <input asp-for="OrderNumber" hidden disabled class="form-control form-control mb-3" placeholder="OrderNumber" />
+                                        <input asp-for="OrderNumber" hidden class="form-control form-control mb-3" placeholder="OrderNumber" />
                                     </div>
                                 </div>
                                 <div class="form-row form-group">
                                     <div class="input-group mb-3">
-                                        <textarea asp-for="OriginalText" disabled class="form-control" placeholder="OriginalText" aria-label="With textarea"></textarea>
+                                        <textarea asp-for="OriginalText" class="form-control" placeholder="OriginalText" aria-label="With textarea"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row form-group">
                                     <div class="input-group mb-3">
-                                        <textarea asp-for="ModifiedText" disabled class="form-control" style="height: 0rem" placeholder="ModifiedText" aria-label="With textarea"></textarea>
+                                        <textarea asp-for="ModifiedText" hidden disabled class="form-control" style="height: 0rem" placeholder="ModifiedText" aria-label="With textarea"></textarea>
                                     </div>
                                 </div>
                                 <input type="hidden" id="ProjectId" name="ProjectId" asp-for="ProjectId" />

@@ -31,16 +31,6 @@ public class DashboardController : Controller
         }
 
         var projects = _unitOfWork.Projects.GetSome(p => p.OwnerId == currentUserId).ToList();
-        // Organize projects by name
-        //var tempProjectList = new List<Project>();
-        //foreach (var p in projects)
-        //{
-        //    foreach (var p2 in tempProjectList)
-        //    {
-
-        //    }
-        //    tempProjectList.Add(p);
-        //}
 
         var dashboardVM = new DashboardVM()
         {
@@ -50,11 +40,4 @@ public class DashboardController : Controller
 
         return View(dashboardVM);
     }
-
-    //[HttpGet]
-    //public async Task<IActionResult> Index()
-    //{
-    //    // Fill dashboard table with user's projects
-    //    return View();
-    //}
 }

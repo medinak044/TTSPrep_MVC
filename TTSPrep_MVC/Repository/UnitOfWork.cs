@@ -5,7 +5,7 @@ using TTSPrep_MVC.Repository.IRepository;
 
 namespace TTSPrep_MVC.Repository;
 
-public class UnitOfWork: IUnitOfWork
+public class UnitOfWork: IUnitOfWork, IDisposable
 {
     private readonly AppDbContext _context;
     private readonly IMapper _mapper;

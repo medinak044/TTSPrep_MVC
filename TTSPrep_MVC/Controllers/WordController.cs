@@ -24,13 +24,6 @@ public class WordController : Controller
     {
         var project = await _unitOfWork.Projects.GetByIdAsync(projectId);
 
-        // Wait for the project object data to load before making more db calls
-        if (project != null)
-        {
-            // Get the chapter data (rework this to use Include() for eager loading so that all data is gathered in one call)
-            project.Words = _unitOfWork.Words.GetSome(w => w.ProjectId == project.Id).ToList();
-        }
-
         return View(project);
     }
 

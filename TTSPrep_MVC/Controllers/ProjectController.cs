@@ -33,15 +33,6 @@ public class ProjectController : Controller
         // Get the project data
         var project = await _unitOfWork.Projects.GetByIdAsync(projectId);
 
-        // Wait for the project object data to load before making more db calls
-        if (project != null)
-        {
-            // Get the chapter data (rework this to use Include() for eager loading so that all data is gathered in one call)
-            project.Chapters = _unitOfWork.Chapters.GetSome(c => c.ProjectId == project.Id).ToList();
-            // Word data associated with project
-            project.Words = _unitOfWork.Words.GetSome(w => w.ProjectId == project.Id).ToList();
-        }
-
         return View(project);
     }
 

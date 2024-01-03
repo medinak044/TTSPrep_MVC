@@ -20,8 +20,21 @@
 <div class="text-center">
     <h1 class="display-4">TTSPrep</h1>
     <p>TTSPrep is an online text preparation tool to aid text-to-speech (TTS) AI voice generation.</p>
-    @*(Add 2 voice clips here to serve as a side-by-side example)*@
+    <a class="btn btn-m btn-primary me-2" asp-controller="Dashboard" asp-action="Index">
+        Get Started<i class="bi bi-arrow-right mx-2"></i>
+    </a>
     <br />
-    <p>"Enrique grabbed his car keys and started up his Porsche"</p>
-    <p>"Enreekay grabbed his car keys and started up his Poorsha"</p>
+    <hr />
+    <h3>Original text</h3>
+    <p>"The connoisseur savored the velvety texture of the Cabernet Sauvignon."</p>
+    <audio class="mb-5" controls="controls">
+        <source src="https://docs.google.com/uc?export=download&id=1Ywrls1Bc2u0uY2ZcI7uORiDB2lvuJa1w" />
+    </audio>
+    <h3>Modified text</h3>
+    <p>"The <u>connis-sewer</u> savored the velvety texture of the <u>Caberney</u> <u>Sauvinyawn</u>."</p>
+    <audio controls="controls">
+        <source src="https://docs.google.com/uc?export=download&id=1eHORYn-Cj-K2nSHAKxrlw0pI8g3f-az5" />
+    </audio>
+    <br />
+    <span style="font-size: 75%; opacity: 0.5;">AI voice clips generated using <a href="https://elevenlabs.io/">elevenlabs.io</a>.</span>
 </div>
