@@ -167,18 +167,16 @@ public class ChapterController : Controller
         }
 
         // Break up the initial modified text into separate words/characters and store them into a collection
-        var modifiedTextWords = chapterForm.ModifiedText.Split(" ");
+        var modifiedTextWords = chapterForm.ModifiedText.Split(" ").ToList();
 
         //Replace the words in the collection with partial match, and replace
-        for (int i = 0; i < modifiedTextWords.Length; i++)
+        for (int i = 0; i < modifiedTextWords.Count(); i++)
         {
-            for (int j = 0; j < wordIdentifierList.Count(); j++)
+            foreach (Word w in wordIdentifierList)
             {
-                // Find out if the word matches a saved word
-                if (modifiedTextWords[i] == wordIdentifierList[j].OriginalSpelling)
+                if (modifiedTextWords[i].Contains(w.OriginalSpelling))
                 {
-                    modifiedTextWords[i] = wordIdentifierList[j].ModifiedSpelling; // Replace with the modified spelling
-                    break;
+                    modifiedTextWords[i] = modifiedTextWords[i].Replace(w.OriginalSpelling, w.ModifiedSpelling);
                 }
             }
         }

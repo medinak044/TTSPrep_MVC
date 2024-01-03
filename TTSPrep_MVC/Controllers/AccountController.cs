@@ -99,7 +99,7 @@ public class AccountController : Controller
         }
 
         TempData["success"] = "Login successful";
-        return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).GetControllerName());
+        return RedirectToAction(nameof(DashboardController.Index), nameof(DashboardController).GetControllerName());
     }
 
     [HttpGet]
