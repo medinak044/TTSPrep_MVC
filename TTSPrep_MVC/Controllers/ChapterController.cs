@@ -157,7 +157,7 @@ public class ChapterController : Controller
     {
         #region Word replace logic
         List<Word> wordIdentifierList = _unitOfWork.Words.GetSome(w => w.ProjectId == chapterForm.ProjectId).ToList();
-        if (wordIdentifierList.IsNullOrEmpty())
+        if (wordIdentifierList == null)
         {
             TempData["error"] = "No words for replacement were saved for this project";
         }
